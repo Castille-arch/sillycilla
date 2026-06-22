@@ -1,14 +1,15 @@
-# Silly Cecilia 💃
+# Silly Cilla 💃
 
-A tiny, ridiculous tribute site for Cecilia Baccaldi: a CSS-animated dancing
-character wearing her photo as a face, a self-generated chiptune melody
-(via Web Audio API, no external audio files needed), and rotating funny
+A tiny, ridiculous Swedish tribute site for Cecilia Baccaldi: an SVG stick
+figure breakdancing with her photo as the head, synced to a real song via
+YouTube's official embed player (streamed from YouTube, not hosted by us —
+no copyrighted audio files in this repo), plus rotating funny Swedish
 captions.
 
 ## Add the photo
 
 Drop a photo of Cecilia into this folder named `cecilia.png` (square-ish
-photos work best). Until you do, a silly placeholder face is shown.
+photos work best).
 
 ## Run locally
 

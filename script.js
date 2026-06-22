@@ -4,73 +4,56 @@ const stopBtn = document.getElementById("stopBtn");
 const caption = document.getElementById("caption");
 
 const captions = [
-  "Cecilia Baccaldi: turning bad decisions into dance moves since forever.",
-  "Scientists agree: Cecilia's hips do not lie, but her excuses do.",
-  "Local legend Cecilia once danced so hard the WiFi disconnected.",
-  "Cecilia Baccaldi — bringing chaotic joy wherever there is a speaker.",
-  "Warning: prolonged exposure to Cecilia's dancing may cause spontaneous happiness.",
-  "They asked Cecilia to tone it down. She turned it up instead.",
+  "Cilla är inte direkt Mensa-medlem, men herregud vad hon kan dansa.",
+  "Forskare bekräftar: Cillas höfter ljuger inte, men hennes ursäkter gör det.",
+  "Lokal legend Cilla dansade en gång så hårt att WiFin kopplade ner.",
+  "Cilla Baccaldi — sprider kaosglädje varhelst det finns en högtalare.",
+  "Varning: långvarig exponering för Cillas dans kan orsaka spontan lycka.",
+  "De bad Cilla dra ner på det. Hon drog upp det istället.",
+  "Cilla löste aldrig ett korsord, men hon har vunnit varje dansbattle.",
 ];
 
 let captionTimer = null;
-let audioCtx = null;
+let player = null;
 let isPlaying = false;
-let noteTimeouts = [];
 
 function cycleCaptions() {
   caption.textContent = captions[Math.floor(Math.random() * captions.length)];
 }
 
-// A goofy little melody, no external files or licensing needed.
-const melody = [
-  { freq: 392, dur: 200 },
-  { freq: 440, dur: 200 },
-  { freq: 523, dur: 200 },
-  { freq: 440, dur: 200 },
-  { freq: 587, dur: 300 },
-  { freq: 523, dur: 200 },
-  { freq: 440, dur: 200 },
-  { freq: 392, dur: 400 },
-];
-
-function playMelodyLoop() {
-  if (!isPlaying) return;
-  let t = audioCtx.currentTime;
-  noteTimeouts = [];
-
-  melody.forEach((note) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = "square";
-    osc.frequency.value = note.freq;
-    gain.gain.value = 0.08;
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start(t);
-    osc.stop(t + note.dur / 1000);
-    t += note.dur / 1000;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("ytplayer", {
+    videoId: "RZWPq8i6MAs",
+    playerVars: { rel: 0 },
+    events: {
+      onStateChange: onPlayerStateChange,
+    },
   });
+}
 
-  const totalDuration = melody.reduce((sum, n) => sum + n.dur, 0);
-  const id = setTimeout(playMelodyLoop, totalDuration);
-  noteTimeouts.push(id);
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.PLAYING) {
+    isPlaying = true;
+    dancer.classList.add("dancing");
+    cycleCaptions();
+    captionTimer = captionTimer || setInterval(cycleCaptions, 2000);
+  } else {
+    isPlaying = false;
+    dancer.classList.remove("dancing");
+    clearInterval(captionTimer);
+    captionTimer = null;
+  }
 }
 
 playBtn.addEventListener("click", () => {
-  if (isPlaying) return;
-  isPlaying = true;
-  audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-  playMelodyLoop();
-
-  dancer.classList.add("dancing");
-  cycleCaptions();
-  captionTimer = setInterval(cycleCaptions, 2500);
+  if (player && typeof player.playVideo === "function") {
+    player.playVideo();
+  }
 });
 
 stopBtn.addEventListener("click", () => {
-  isPlaying = false;
-  noteTimeouts.forEach(clearTimeout);
-  dancer.classList.remove("dancing");
-  clearInterval(captionTimer);
-  caption.textContent = "Cecilia takes a bow. The crowd (you) goes wild.";
+  if (player && typeof player.pauseVideo === "function") {
+    player.pauseVideo();
+  }
+  caption.textContent = "Cilla tar en bugning. Publiken (du) går bananas.";
 });

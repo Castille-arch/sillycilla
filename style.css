@@ -13,6 +13,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #2d1b4e;
+  padding: 1rem;
 }
 
 @keyframes bgshift {
@@ -24,13 +25,20 @@ body {
 .stage {
   text-align: center;
   padding: 2rem;
-  max-width: 600px;
+  max-width: 620px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 50px rgba(45, 27, 78, 0.35);
+  backdrop-filter: blur(4px);
 }
 
 .title {
   font-size: 2.2rem;
-  text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0,0,0,0.15);
+  text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0, 0, 0, 0.15);
   margin-bottom: 0.2rem;
+  letter-spacing: 1px;
 }
 
 .subtitle {
@@ -48,7 +56,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4) inset;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4) inset;
 }
 
 .disco-light {
@@ -57,7 +65,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
   animation: spin 4s linear infinite;
   pointer-events: none;
 }
@@ -69,110 +77,84 @@ body {
 
 .dancer {
   position: relative;
-  width: 120px;
-  height: 260px;
+  width: 170px;
+  height: 250px;
   margin-bottom: 10px;
-  transform-origin: bottom center;
+  overflow: visible;
 }
 
-.dancer.dancing {
-  animation: bop 0.5s ease-in-out infinite;
+#rig {
+  transform-origin: 100px 150px;
 }
 
-@keyframes bop {
-  0%, 100% { transform: translateY(0) rotate(-6deg); }
-  50% { transform: translateY(-25px) rotate(6deg); }
+.dancer.dancing #rig {
+  animation: breakdance 1.6s linear infinite;
 }
 
-.head {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  overflow: hidden;
-  background: #ffd9a0;
-  z-index: 3;
+/* A cheap headspin/windmill illusion: spin the whole rig around its center
+   while it travels low to the floor, then pop back up for a "freeze". */
+@keyframes breakdance {
+  0%   { transform: translateY(0)    rotate(0deg)   scaleY(1); }
+  10%  { transform: translateY(40px) rotate(60deg)  scaleY(0.7); }
+  25%  { transform: translateY(55px) rotate(180deg) scaleY(0.6); }
+  40%  { transform: translateY(40px) rotate(300deg) scaleY(0.7); }
+  50%  { transform: translateY(0)    rotate(360deg) scaleY(1); }
+  60%  { transform: translateY(-15px) rotate(360deg) scaleY(1.05); }
+  70%  { transform: translateY(0)    rotate(420deg) scaleY(1); }
+  85%  { transform: translateY(20px) rotate(480deg) scaleY(0.85); }
+  100% { transform: translateY(0)    rotate(540deg) scaleY(1); }
 }
 
-.head img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.limb {
+  stroke: #fff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform-origin: 100px 100px;
 }
 
-.body {
-  position: absolute;
-  top: 65px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 100px;
-  background: #ff6ec4;
-  border-radius: 20px;
-  z-index: 2;
+.spine {
+  stroke: #facc15;
+  stroke-width: 12;
 }
 
-.arm {
-  position: absolute;
-  top: 75px;
-  width: 14px;
-  height: 80px;
-  background: #facc15;
-  border-radius: 10px;
-  transform-origin: top center;
-  z-index: 1;
+.halo {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6;
 }
 
-.arm-left { left: 18px; }
-.arm-right { right: 18px; }
+#face {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
 
 .dancer.dancing .arm-left {
-  animation: swingLeft 0.5s ease-in-out infinite;
+  animation: swingLeft 0.18s ease-in-out infinite;
 }
 .dancer.dancing .arm-right {
-  animation: swingRight 0.5s ease-in-out infinite;
+  animation: swingRight 0.18s ease-in-out infinite;
+}
+.dancer.dancing .leg-left {
+  animation: kickLeft 0.22s ease-in-out infinite;
+}
+.dancer.dancing .leg-right {
+  animation: kickRight 0.22s ease-in-out infinite;
 }
 
 @keyframes swingLeft {
-  0%, 100% { transform: rotate(-50deg); }
-  50% { transform: rotate(50deg); }
+  0%, 100% { transform: rotate(-70deg); }
+  50% { transform: rotate(70deg); }
 }
 @keyframes swingRight {
-  0%, 100% { transform: rotate(50deg); }
-  50% { transform: rotate(-50deg); }
+  0%, 100% { transform: rotate(70deg); }
+  50% { transform: rotate(-70deg); }
 }
-
-.leg {
-  position: absolute;
-  bottom: 0;
-  width: 16px;
-  height: 70px;
-  background: #7873f5;
-  border-radius: 10px;
-  transform-origin: top center;
-}
-
-.leg-left { left: 35px; }
-.leg-right { right: 35px; }
-
-.dancer.dancing .leg-left {
-  animation: kickLeft 0.5s ease-in-out infinite;
-}
-.dancer.dancing .leg-right {
-  animation: kickRight 0.5s ease-in-out infinite;
-}
-
 @keyframes kickLeft {
-  0%, 100% { transform: rotate(20deg); }
-  50% { transform: rotate(-20deg); }
+  0%, 100% { transform: rotate(60deg); }
+  50% { transform: rotate(-60deg); }
 }
 @keyframes kickRight {
-  0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(20deg); }
+  0%, 100% { transform: rotate(-60deg); }
+  50% { transform: rotate(60deg); }
 }
 
 .controls {
@@ -180,6 +162,7 @@ body {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 button {
@@ -191,7 +174,7 @@ button {
   background: #2d1b4e;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
   transition: transform 0.1s ease;
 }
 
@@ -201,12 +184,26 @@ button:hover {
 
 button:active {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.player-wrap {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+#ytplayer {
+  width: 280px;
+  height: 158px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .caption-box {
   margin-top: 1.5rem;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
   padding: 1rem;
   font-weight: bold;

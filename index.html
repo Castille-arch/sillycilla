@@ -1,50 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Silly Cecilia</title>
+<title>Silly Cilla</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="stage">
-    <h1 class="title">🎉 SILLY CECILIA BACCALDI 🎉</h1>
-    <p class="subtitle">Warning: certified menace on the dance floor.</p>
+    <h1 class="title">🎉 SILLY CILLA 🎉</h1>
+    <p class="subtitle">Inte direkt skarpaste kniven i lådan, men herregud vad hon kan dansa.</p>
 
     <div class="dance-floor">
-      <div class="dancer" id="dancer">
-        <div class="arm arm-left"></div>
-        <div class="arm arm-right"></div>
-        <div class="head">
-          <img
-            src="cecilia.png"
-            alt="Cecilia"
-            id="face"
-            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ffd9a0%22/><circle cx=%2235%22 cy=%2240%22 r=%226%22 fill=%22%232d1b4e%22/><circle cx=%2265%22 cy=%2240%22 r=%226%22 fill=%22%232d1b4e%22/><path d=%22M30,65 Q50,90 70,65%22 stroke=%22%232d1b4e%22 stroke-width=%226%22 fill=%22none%22/></svg>'"
-          />
-
-        </div>
-        <div class="body"></div>
-        <div class="leg leg-left"></div>
-        <div class="leg leg-right"></div>
-      </div>
       <div class="disco-light"></div>
+      <svg class="dancer" id="dancer" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="faceClip">
+            <circle cx="100" cy="48" r="42" />
+          </clipPath>
+        </defs>
+        <g id="rig">
+          <line class="limb arm-left" x1="100" y1="100" x2="55" y2="150" />
+          <line class="limb arm-right" x1="100" y1="100" x2="145" y2="150" />
+          <line class="limb leg-left" x1="100" y1="190" x2="65" y2="255" />
+          <line class="limb leg-right" x1="100" y1="190" x2="135" y2="255" />
+          <line class="limb spine" x1="100" y1="100" x2="100" y2="190" />
+          <circle class="halo" cx="100" cy="48" r="46" />
+          <image
+            id="face"
+            href="cecilia.png"
+            x="58" y="6" width="84" height="84"
+            clip-path="url(#faceClip)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+      </svg>
     </div>
 
     <div class="controls">
-      <button id="playBtn">▶️ Drop the Beat</button>
-      <button id="stopBtn">⏹️ Make It Stop</button>
+      <button id="playBtn">▶️ Kör låten</button>
+      <button id="stopBtn">⏹️ Nu räcker det, Cecilia</button>
+    </div>
+
+    <div class="player-wrap">
+      <div id="ytplayer"></div>
     </div>
 
     <div class="caption-box">
-      <p id="caption">Click the button. Cecilia cannot be stopped. Science has tried.</p>
+      <p id="caption">Tryck på knappen. Cecilia går inte att stoppa. Vetenskapen har försökt.</p>
     </div>
 
     <footer>
-      Built with love, bad CSS, and zero rhythm — for Cecilia 💃
+      Gjort med kärlek, usel CSS och noll rytmkänsla — till Cecilia 💃
     </footer>
   </div>
 
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script src="script.js"></script>
 </body>
 </html>
