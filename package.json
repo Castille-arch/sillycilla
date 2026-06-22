@@ -1,0 +1,12 @@
+{
+  "name": "silly-cecilia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A silly dancing tribute site for Cecilia Baccaldi.",
+  "scripts": {
+    "start": "serve -s . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}

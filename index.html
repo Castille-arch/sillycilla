@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Silly Cecilia</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stage">
+    <h1 class="title">🎉 SILLY CECILIA BACCALDI 🎉</h1>
+    <p class="subtitle">Warning: certified menace on the dance floor.</p>
+
+    <div class="dance-floor">
+      <div class="dancer" id="dancer">
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="head">
+          <img
+            src="cecilia.jpg"
+            alt="Cecilia"
+            id="face"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ffd9a0%22/><circle cx=%2235%22 cy=%2240%22 r=%226%22 fill=%22%232d1b4e%22/><circle cx=%2265%22 cy=%2240%22 r=%226%22 fill=%22%232d1b4e%22/><path d=%22M30,65 Q50,90 70,65%22 stroke=%22%232d1b4e%22 stroke-width=%226%22 fill=%22none%22/></svg>'"
+          />
+
+        </div>
+        <div class="body"></div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+      </div>
+      <div class="disco-light"></div>
+    </div>
+
+    <div class="controls">
+      <button id="playBtn">▶️ Drop the Beat</button>
+      <button id="stopBtn">⏹️ Make It Stop</button>
+    </div>
+
+    <div class="caption-box">
+      <p id="caption">Click the button. Cecilia cannot be stopped. Science has tried.</p>
+    </div>
+
+    <footer>
+      Built with love, bad CSS, and zero rhythm — for Cecilia 💃
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
