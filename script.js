@@ -18,6 +18,8 @@ let player = null;
 let playerReady = false;
 let pendingPlay = false;
 let unmuted = false;
+let apiLoadAttempts = 0;
+const MAX_API_ATTEMPTS = 4;
 
 function cycleCaptions() {
   caption.textContent = captions[Math.floor(Math.random() * captions.length)];
@@ -36,7 +38,29 @@ function unmuteOnFirstInteraction() {
 document.addEventListener("click", unmuteOnFirstInteraction);
 document.addEventListener("keydown", unmuteOnFirstInteraction);
 
+// The YouTube widget script occasionally fails to fire its ready callback
+// (flaky network/cache behavior), leaving the page stuck "loading" forever.
+// Load it ourselves so we can detect that and retry with a fresh request.
+function loadYouTubeAPI() {
+  apiLoadAttempts++;
+  document.querySelectorAll('script[data-yt-api]').forEach((tag) => tag.remove());
+  const tag = document.createElement("script");
+  tag.src = `https://www.youtube.com/iframe_api?retry=${apiLoadAttempts}`;
+  tag.dataset.ytApi = "1";
+  document.head.appendChild(tag);
+
+  setTimeout(() => {
+    if (!playerReady && apiLoadAttempts < MAX_API_ATTEMPTS) {
+      loadYouTubeAPI();
+    } else if (!playerReady) {
+      caption.textContent = "Låten ville inte starta. Testa att ladda om sidan.";
+    }
+  }, 4000);
+}
+loadYouTubeAPI();
+
 function onYouTubeIframeAPIReady() {
+  if (player) return; // guard against duplicate init from a retried load
   player = new YT.Player("ytplayer", {
     videoId: "RZWPq8i6MAs",
     playerVars: { rel: 0, autoplay: 1, mute: 1, playsinline: 1 },
