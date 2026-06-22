@@ -7,7 +7,7 @@ captions.
 
 ## Add the photo
 
-Drop a photo of Cecilia into this folder named `cecilia.jpg` (square-ish
+Drop a photo of Cecilia into this folder named `cecilia.png` (square-ish
 photos work best). Until you do, a silly placeholder face is shown.
 
 ## Run locally
