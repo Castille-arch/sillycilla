@@ -73,6 +73,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  gap: 1.5rem;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.35) inset;
 }
 
@@ -107,12 +108,21 @@ body {
   overflow: visible;
 }
 
-#rig {
+.rig {
   transform-origin: 100px 150px;
 }
 
-.dancer.dancing #rig {
+.dancer.dancing .rig {
   animation: groove 2.4s ease-in-out infinite;
+}
+
+/* Offset the second dancer half a cycle so they don't move like clones. */
+.dancer-me.dancing .rig,
+.dancer-me.dancing .arm-left,
+.dancer-me.dancing .arm-right,
+.dancer-me.dancing .leg-left,
+.dancer-me.dancing .leg-right {
+  animation-delay: -1.2s;
 }
 
 /* A short, repeatable choreography: disco point left, disco point right,
@@ -154,7 +164,7 @@ body {
   opacity: 0.8;
 }
 
-#face {
+.face {
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 

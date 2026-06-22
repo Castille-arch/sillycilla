@@ -16,13 +16,14 @@
 
     <div class="dance-floor">
       <div class="disco-light"></div>
+
       <svg class="dancer" id="dancer" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <clipPath id="faceClip">
+          <clipPath id="faceClipCilla">
             <circle cx="100" cy="48" r="42" />
           </clipPath>
         </defs>
-        <g id="rig">
+        <g class="rig">
           <line class="limb arm-left" x1="100" y1="100" x2="55" y2="150" />
           <line class="limb arm-right" x1="100" y1="100" x2="145" y2="150" />
           <line class="limb leg-left" x1="100" y1="190" x2="65" y2="255" />
@@ -30,10 +31,33 @@
           <line class="limb spine" x1="100" y1="100" x2="100" y2="190" />
           <circle class="halo" cx="100" cy="48" r="46" />
           <image
-            id="face"
+            class="face"
             href="cecilia.png"
             x="58" y="6" width="84" height="84"
-            clip-path="url(#faceClip)"
+            clip-path="url(#faceClipCilla)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+        </g>
+      </svg>
+
+      <svg class="dancer dancer-me" id="dancer2" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="faceClipMe">
+            <circle cx="100" cy="48" r="42" />
+          </clipPath>
+        </defs>
+        <g class="rig">
+          <line class="limb arm-left" x1="100" y1="100" x2="55" y2="150" />
+          <line class="limb arm-right" x1="100" y1="100" x2="145" y2="150" />
+          <line class="limb leg-left" x1="100" y1="190" x2="65" y2="255" />
+          <line class="limb leg-right" x1="100" y1="190" x2="135" y2="255" />
+          <line class="limb spine" x1="100" y1="100" x2="100" y2="190" />
+          <circle class="halo" cx="100" cy="48" r="46" />
+          <image
+            class="face"
+            href="me.png"
+            x="58" y="6" width="84" height="84"
+            clip-path="url(#faceClipMe)"
             preserveAspectRatio="xMidYMid slice"
           />
         </g>

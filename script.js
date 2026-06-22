@@ -1,4 +1,4 @@
-const dancer = document.getElementById("dancer");
+const dancers = document.querySelectorAll(".dancer");
 const playBtn = document.getElementById("playBtn");
 const stopBtn = document.getElementById("stopBtn");
 const caption = document.getElementById("caption");
@@ -15,10 +15,16 @@ const captions = [
 
 let captionTimer = null;
 let player = null;
+let playerReady = false;
+let pendingPlay = false;
 let unmuted = false;
 
 function cycleCaptions() {
   caption.textContent = captions[Math.floor(Math.random() * captions.length)];
+}
+
+function setDancing(on) {
+  dancers.forEach((d) => d.classList.toggle("dancing", on));
 }
 
 function unmuteOnFirstInteraction() {
@@ -35,28 +41,42 @@ function onYouTubeIframeAPIReady() {
     videoId: "RZWPq8i6MAs",
     playerVars: { rel: 0, autoplay: 1, mute: 1, playsinline: 1 },
     events: {
-      onReady: (event) => event.target.playVideo(),
+      onReady: (event) => {
+        playerReady = true;
+        event.target.playVideo();
+        if (pendingPlay) {
+          unmuteOnFirstInteraction();
+          event.target.playVideo();
+          pendingPlay = false;
+        }
+      },
       onStateChange: onPlayerStateChange,
+      onError: () => {
+        caption.textContent = "Hoppsan, låten gick inte att ladda. Cilla dansar tyst istället.";
+      },
     },
   });
 }
 
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
-    dancer.classList.add("dancing");
+    setDancing(true);
     cycleCaptions();
     captionTimer = captionTimer || setInterval(cycleCaptions, 2000);
   } else {
-    dancer.classList.remove("dancing");
+    setDancing(false);
     clearInterval(captionTimer);
     captionTimer = null;
   }
 }
 
 playBtn.addEventListener("click", () => {
-  unmuteOnFirstInteraction();
-  if (player && typeof player.playVideo === "function") {
+  if (playerReady && player) {
+    unmuteOnFirstInteraction();
     player.playVideo();
+  } else {
+    pendingPlay = true;
+    caption.textContent = "Laddar låten, ett ögonblick...";
   }
 });
 
