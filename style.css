@@ -189,17 +189,12 @@ button:active {
 }
 
 .player-wrap {
-  margin-top: 1.8rem;
-  display: flex;
-  justify-content: center;
-}
-
-#ytplayer {
-  width: 420px;
-  height: 237px;
-  border-radius: 12px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .caption-box {

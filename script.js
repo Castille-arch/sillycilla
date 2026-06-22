@@ -15,17 +15,27 @@ const captions = [
 
 let captionTimer = null;
 let player = null;
-let isPlaying = false;
+let unmuted = false;
 
 function cycleCaptions() {
   caption.textContent = captions[Math.floor(Math.random() * captions.length)];
 }
 
+function unmuteOnFirstInteraction() {
+  if (!unmuted && player && typeof player.unMute === "function") {
+    player.unMute();
+    unmuted = true;
+  }
+}
+document.addEventListener("click", unmuteOnFirstInteraction);
+document.addEventListener("keydown", unmuteOnFirstInteraction);
+
 function onYouTubeIframeAPIReady() {
   player = new YT.Player("ytplayer", {
     videoId: "RZWPq8i6MAs",
-    playerVars: { rel: 0 },
+    playerVars: { rel: 0, autoplay: 1, mute: 1, playsinline: 1 },
     events: {
+      onReady: (event) => event.target.playVideo(),
       onStateChange: onPlayerStateChange,
     },
   });
@@ -33,12 +43,10 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.PLAYING) {
-    isPlaying = true;
     dancer.classList.add("dancing");
     cycleCaptions();
     captionTimer = captionTimer || setInterval(cycleCaptions, 2000);
   } else {
-    isPlaying = false;
     dancer.classList.remove("dancing");
     clearInterval(captionTimer);
     captionTimer = null;
@@ -46,6 +54,7 @@ function onPlayerStateChange(event) {
 }
 
 playBtn.addEventListener("click", () => {
+  unmuteOnFirstInteraction();
   if (player && typeof player.playVideo === "function") {
     player.playVideo();
   }
