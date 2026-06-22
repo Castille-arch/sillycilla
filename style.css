@@ -1,3 +1,14 @@
+:root {
+  --bg-deep: #15112b;
+  --accent: #8b5cf6;
+  --accent-bright: #c084fc;
+  --accent-warm: #f59e0b;
+  --ink: #1c1530;
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text-soft: rgba(255, 255, 255, 0.72);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,69 +16,81 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff6ec4, #7873f5, #4ade80, #facc15);
-  background-size: 400% 400%;
-  animation: bgshift 10s ease infinite;
-  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.35), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.18), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(192, 132, 252, 0.2), transparent 50%),
+    var(--bg-deep);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2d1b4e;
-  padding: 1rem;
-}
-
-@keyframes bgshift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  color: #fff;
+  padding: 2rem 1rem;
 }
 
 .stage {
   text-align: center;
   padding: 3rem;
-  max-width: 930px;
+  max-width: 700px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 28px;
-  border: 3px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 20px 50px rgba(45, 27, 78, 0.35);
-  backdrop-filter: blur(4px);
+  background: var(--card-bg);
+  border-radius: 24px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
 }
 
 .title {
-  font-size: 3.3rem;
-  text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0, 0, 0, 0.15);
-  margin-bottom: 0.3rem;
-  letter-spacing: 1px;
+  font-family: "Poppins", "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 2.6rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--accent-bright), var(--accent-warm));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .subtitle {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 2.2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin: 0 0 2.2rem;
 }
 
 .dance-floor {
   position: relative;
-  height: 480px;
-  background: repeating-conic-gradient(#1a1a2e 0% 25%, #16213e 0% 50%) 50% / 60px 60px;
-  border-radius: 16px;
-  border: 6px solid #fff;
+  height: 420px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 40%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 64px),
+    linear-gradient(160deg, #1d1740, #110c24);
+  border-radius: 18px;
+  border: 1px solid var(--card-border);
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4) inset;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.35) inset;
 }
 
 .disco-light {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
-  animation: spin 4s linear infinite;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(192, 132, 252, 0.18) 40deg,
+    transparent 90deg,
+    rgba(245, 158, 11, 0.12) 160deg,
+    transparent 220deg
+  );
+  animation: spin 12s linear infinite;
   pointer-events: none;
 }
 
@@ -78,9 +101,9 @@ body {
 
 .dancer {
   position: relative;
-  width: 255px;
-  height: 375px;
-  margin-bottom: 15px;
+  width: 220px;
+  height: 320px;
+  margin-bottom: 24px;
   overflow: visible;
 }
 
@@ -89,126 +112,171 @@ body {
 }
 
 .dancer.dancing #rig {
-  animation: breakdance 1.6s linear infinite;
+  animation: groove 2.4s ease-in-out infinite;
 }
 
-/* A cheap headspin/windmill illusion: spin the whole rig around its center
-   while it travels low to the floor, then pop back up for a "freeze". */
-@keyframes breakdance {
-  0%   { transform: translateY(0)    rotate(0deg)   scaleY(1); }
-  10%  { transform: translateY(40px) rotate(60deg)  scaleY(0.7); }
-  25%  { transform: translateY(55px) rotate(180deg) scaleY(0.6); }
-  40%  { transform: translateY(40px) rotate(300deg) scaleY(0.7); }
-  50%  { transform: translateY(0)    rotate(360deg) scaleY(1); }
-  60%  { transform: translateY(-15px) rotate(360deg) scaleY(1.05); }
-  70%  { transform: translateY(0)    rotate(420deg) scaleY(1); }
-  85%  { transform: translateY(20px) rotate(480deg) scaleY(0.85); }
-  100% { transform: translateY(0)    rotate(540deg) scaleY(1); }
+/* A short, repeatable choreography: disco point left, disco point right,
+   the floss, then a jump-star finish — actual named dance moves, not noise. */
+@keyframes groove {
+  0%   { transform: translateY(0)    rotate(-5deg); }
+  20%  { transform: translateY(0)    rotate(5deg); }
+  40%  { transform: translateY(-4px) rotate(-3deg); }
+  60%  { transform: translateY(-4px) rotate(3deg); }
+  80%  { transform: translateY(-26px) rotate(0deg); }
+  100% { transform: translateY(0)    rotate(-5deg); }
 }
 
 .limb {
-  stroke: #fff;
-  stroke-width: 10;
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 9;
   stroke-linecap: round;
+}
+
+.arm-left,
+.arm-right {
   transform-origin: 100px 100px;
 }
 
+.leg-left,
+.leg-right {
+  transform-origin: 100px 190px;
+}
+
 .spine {
-  stroke: #facc15;
-  stroke-width: 12;
+  stroke: var(--accent-warm);
+  stroke-width: 10;
 }
 
 .halo {
   fill: none;
-  stroke: #fff;
-  stroke-width: 6;
+  stroke: var(--accent-bright);
+  stroke-width: 4;
+  opacity: 0.8;
 }
 
 #face {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
 .dancer.dancing .arm-left {
-  animation: swingLeft 0.18s ease-in-out infinite;
+  animation: armLeftDance 2.4s ease-in-out infinite;
 }
 .dancer.dancing .arm-right {
-  animation: swingRight 0.18s ease-in-out infinite;
+  animation: armRightDance 2.4s ease-in-out infinite;
 }
 .dancer.dancing .leg-left {
-  animation: kickLeft 0.22s ease-in-out infinite;
+  animation: legLeftDance 2.4s ease-in-out infinite;
 }
 .dancer.dancing .leg-right {
-  animation: kickRight 0.22s ease-in-out infinite;
+  animation: legRightDance 2.4s ease-in-out infinite;
 }
 
-@keyframes swingLeft {
-  0%, 100% { transform: rotate(-70deg); }
-  50% { transform: rotate(70deg); }
+/* 0-20%: disco point (right arm up, left down), mirrored at 20-40%.
+   40-60%: the floss, arms swinging front/back on opposite sides.
+   60-80%: wind-up. 80-100%: jump-star with arms thrown overhead. */
+@keyframes armLeftDance {
+  0%   { transform: rotate(15deg); }
+  20%  { transform: rotate(-145deg); }
+  40%  { transform: rotate(15deg); }
+  50%  { transform: rotate(-50deg); }
+  60%  { transform: rotate(15deg); }
+  70%  { transform: rotate(-50deg); }
+  80%  { transform: rotate(-160deg); }
+  100% { transform: rotate(15deg); }
 }
-@keyframes swingRight {
-  0%, 100% { transform: rotate(70deg); }
-  50% { transform: rotate(-70deg); }
+@keyframes armRightDance {
+  0%   { transform: rotate(-15deg); }
+  20%  { transform: rotate(15deg); }
+  40%  { transform: rotate(-145deg); }
+  50%  { transform: rotate(-15deg); }
+  60%  { transform: rotate(50deg); }
+  70%  { transform: rotate(-15deg); }
+  80%  { transform: rotate(160deg); }
+  100% { transform: rotate(-15deg); }
 }
-@keyframes kickLeft {
-  0%, 100% { transform: rotate(60deg); }
-  50% { transform: rotate(-60deg); }
+@keyframes legLeftDance {
+  0%, 40% { transform: rotate(-8deg); }
+  50%  { transform: rotate(18deg); }
+  60%  { transform: rotate(-8deg); }
+  70%  { transform: rotate(18deg); }
+  80%  { transform: rotate(-30deg); }
+  100% { transform: rotate(-8deg); }
 }
-@keyframes kickRight {
-  0%, 100% { transform: rotate(-60deg); }
-  50% { transform: rotate(60deg); }
+@keyframes legRightDance {
+  0%, 40% { transform: rotate(8deg); }
+  50%  { transform: rotate(-18deg); }
+  60%  { transform: rotate(8deg); }
+  70%  { transform: rotate(-18deg); }
+  80%  { transform: rotate(30deg); }
+  100% { transform: rotate(8deg); }
 }
 
 .controls {
-  margin-top: 2.2rem;
+  margin-top: 2rem;
   display: flex;
-  gap: 1.2rem;
+  gap: 0.9rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 button {
-  font-size: 1.4rem;
-  font-family: inherit;
-  padding: 1rem 1.8rem;
-  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: #2d1b4e;
-  color: #fff;
   cursor: pointer;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
-  transition: transform 0.1s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#playBtn {
+  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+}
+
+#stopBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-soft);
+  border-color: var(--card-border);
 }
 
 button:hover {
   transform: translateY(-2px);
 }
 
+#playBtn:hover {
+  box-shadow: 0 10px 28px rgba(139, 92, 246, 0.55);
+}
+
 button:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
 }
 
 .player-wrap {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  opacity: 0;
+  left: -9999px;
+  top: 0;
+  width: 320px;
+  height: 180px;
   pointer-events: none;
 }
 
 .caption-box {
-  margin-top: 2.2rem;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
-  padding: 1.4rem;
-  font-size: 1.15rem;
-  font-weight: bold;
-  min-height: 2.5rem;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 1.1rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  min-height: 1.6rem;
 }
 
 footer {
   margin-top: 2rem;
-  font-size: 1rem;
-  opacity: 0.8;
+  font-size: 0.85rem;
+  color: var(--text-soft);
 }
