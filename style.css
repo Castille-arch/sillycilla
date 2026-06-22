@@ -24,8 +24,8 @@ body {
 
 .stage {
   text-align: center;
-  padding: 2rem;
-  max-width: 620px;
+  padding: 3rem;
+  max-width: 930px;
   width: 100%;
   background: rgba(255, 255, 255, 0.18);
   border-radius: 28px;
@@ -35,20 +35,21 @@ body {
 }
 
 .title {
-  font-size: 2.2rem;
+  font-size: 3.3rem;
   text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0, 0, 0, 0.15);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   letter-spacing: 1px;
 }
 
 .subtitle {
+  font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.2rem;
 }
 
 .dance-floor {
   position: relative;
-  height: 320px;
+  height: 480px;
   background: repeating-conic-gradient(#1a1a2e 0% 25%, #16213e 0% 50%) 50% / 60px 60px;
   border-radius: 16px;
   border: 6px solid #fff;
@@ -77,9 +78,9 @@ body {
 
 .dancer {
   position: relative;
-  width: 170px;
-  height: 250px;
-  margin-bottom: 10px;
+  width: 255px;
+  height: 375px;
+  margin-bottom: 15px;
   overflow: visible;
 }
 
@@ -158,17 +159,17 @@ body {
 }
 
 .controls {
-  margin-top: 1.5rem;
+  margin-top: 2.2rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 button {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-family: inherit;
-  padding: 0.7rem 1.2rem;
+  padding: 1rem 1.8rem;
   border: none;
   border-radius: 999px;
   background: #2d1b4e;
@@ -188,30 +189,31 @@ button:active {
 }
 
 .player-wrap {
-  margin-top: 1.2rem;
+  margin-top: 1.8rem;
   display: flex;
   justify-content: center;
 }
 
 #ytplayer {
-  width: 280px;
-  height: 158px;
+  width: 420px;
+  height: 237px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .caption-box {
-  margin-top: 1.5rem;
+  margin-top: 2.2rem;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.4rem;
+  font-size: 1.15rem;
   font-weight: bold;
   min-height: 2.5rem;
 }
 
 footer {
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
+  margin-top: 2rem;
+  font-size: 1rem;
   opacity: 0.8;
 }
